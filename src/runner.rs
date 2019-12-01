@@ -26,9 +26,8 @@ pub fn runner_impl(args: pm::TokenStream, input: pm::TokenStream) -> pm::TokenSt
 
     let original_fn = input.clone();
 
-    let fn_name = input.ident;
-    let decl = input.decl;
-    let out_t = if let ReturnType::Type(_, p) = decl.output {
+    let fn_name = input.sig.ident;
+    let out_t = if let ReturnType::Type(_, p) = input.sig.output {
         p
     } else {
         panic!()

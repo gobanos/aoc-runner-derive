@@ -18,9 +18,8 @@ pub fn generator_impl(args: pm::TokenStream, input: pm::TokenStream) -> pm::Toke
 
     let input = parse_macro_input!(input as ItemFn);
 
-    let fn_name = input.ident;
-    let decl = input.decl;
-    let out_t = if let ReturnType::Type(_, p) = decl.output {
+    let fn_name = input.sig.ident;
+    let out_t = if let ReturnType::Type(_, p) = input.sig.output {
         p
     } else {
         panic!("cannot find output type for {}", fn_name)
